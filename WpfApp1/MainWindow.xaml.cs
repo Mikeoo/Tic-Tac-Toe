@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace WpfApp1
 {
@@ -26,6 +27,7 @@ namespace WpfApp1
         /// If game has ended true, false if not
         /// </summary>
         private bool mGameEnded;
+        private Brush brushes;
         #endregion
         #region default constructor
         /// <summary>
@@ -39,6 +41,7 @@ namespace WpfApp1
         }
         #endregion default constructor defa
 
+        #region startgame
         private void newGame()
         {
             // reserve 9cells in array for res
@@ -53,8 +56,18 @@ namespace WpfApp1
                 Container.Children.Cast<Button>().ToList().ForEach(button =>
                 {
                     button.Content = string.Empty;
+                    button.Background = Brushes.White;
+                    button.Foreground = Brushes.Blue;
+
                 });
+                // game has ended
+                mGameEnded = false;
             }
+        }
+        #endregion
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
