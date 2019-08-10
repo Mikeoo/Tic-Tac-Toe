@@ -20,6 +20,11 @@ namespace WpfApp1
         /// True if player1 turn(x) false if player2 turn (0)
         /// </summary>
         private bool mPlayer1turn;
+
+        /// <summary>
+        /// If game has ended true, false if not
+        /// </summary>
+        private bool mGameEnded;
         #endregion
         #region default constructor
         /// <summary>
