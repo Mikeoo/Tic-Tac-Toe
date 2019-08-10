@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Boter Kaas en eieren" Height="500" Width="500">
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="FontSize" Value="80" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid x:Name="Container">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

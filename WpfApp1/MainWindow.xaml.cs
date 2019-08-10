@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace WpfApp1
 {
@@ -20,9 +10,32 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region private variables
+        /// <summary>
+        /// Holds the current value of the cells
+        /// </summary>
+        private MarkType[] mResults;
+
+        /// <summary>
+        /// True if player1 turn(x) false if player2 turn (0)
+        /// </summary>
+        private bool mPlayer1turn;
+        #endregion
+        #region default constructor
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+
+            newGame();
+        }
+        #endregion default constructor defa
+
+        private void newGame()
+        {
+            throw new NotImplementedException();
         }
     }
 }
