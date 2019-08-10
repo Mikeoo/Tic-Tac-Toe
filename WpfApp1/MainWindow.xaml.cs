@@ -1,7 +1,8 @@
 ﻿
 using System;
+using System.Linq;
 using System.Windows;
-
+using System.Windows.Controls;
 
 namespace WpfApp1
 {
@@ -40,7 +41,20 @@ namespace WpfApp1
 
         private void newGame()
         {
-            throw new NotImplementedException();
+            // reserve 9cells in array for res
+            mResults = new MarkType[9];
+
+            for (var i = 0; i < mResults.Length; i++)
+            {
+                mResults[i] = MarkType.Free;
+
+                mPlayer1turn = true;
+
+                Container.Children.Cast<Button>().ToList().ForEach(button =>
+                {
+                    button.Content = string.Empty;
+                });
+            }
         }
     }
 }
