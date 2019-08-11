@@ -65,9 +65,129 @@ namespace WpfApp1
             }
         }
         #endregion
+        #region click events
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (mGameEnded)
+            {
+                newGame();
+                return;
+            }
 
+            var button = (Button)sender;
+
+            var colomn = Grid.GetColumn(button);
+            var row = Grid.GetRow(button);
+
+            var index = colomn + (row * 3);
+            if (mResults[index] != MarkType.Free)
+                return;
+
+            if (mPlayer1turn)
+                mResults[index] = MarkType.Cross;
+            else
+                mResults[index] = MarkType.Nought;
+
+            button.Content = mPlayer1turn ? "X" : "O";
+
+            if (!mPlayer1turn)
+                button.Foreground = Brushes.Red;
+            // changes value on each click
+            mPlayer1turn ^= true;
+            #endregion
+
+            #region winner rows
+            // check if there is a winner on row 0
+            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[1] & mResults[2]) == mResults[0])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button0_0.Background = Button1_0.Background = Button2_0.Background = Brushes.Green;
+            }
+
+            // check if there is a winner on row 1
+            if (mResults[3] != MarkType.Free && (mResults[3] & mResults[4] & mResults[5]) == mResults[3])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button0_1.Background = Button1_1.Background = Button2_1.Background = Brushes.Green;
+            }
+
+            // check if there is a winner on row 2
+            if (mResults[6] != MarkType.Free && (mResults[6] & mResults[7] & mResults[8]) == mResults[6])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button0_2.Background = Button1_2.Background = Button2_2.Background = Brushes.Green;
+            }
+            #endregion
+
+            #region winner colomn
+            // check if there is a winner on col 0
+            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[3] & mResults[6]) == mResults[0])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button0_0.Background = Button0_1.Background = Button0_2.Background = Brushes.Green;
+            }
+
+            // check if there is a winner on col 1
+            if (mResults[1] != MarkType.Free && (mResults[1] & mResults[4] & mResults[7]) == mResults[1])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button1_0.Background = Button1_1.Background = Button1_2.Background = Brushes.Green;
+            }
+
+            // check if there is a winner on col 2
+            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[5] & mResults[8]) == mResults[2])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button2_0.Background = Button2_1.Background = Button2_2.Background = Brushes.Green;
+            }
+
+            #endregion
+
+            #region winner diagonal
+
+            // check if there is a winner on diag top left bottom right
+            if (mResults[0] != MarkType.Free && (mResults[0] & mResults[4] & mResults[8]) == mResults[0])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button0_0.Background = Button1_1.Background = Button2_2.Background = Brushes.Green;
+            }
+
+            // check if there is a winner on diag top right to bottom left
+            if (mResults[2] != MarkType.Free && (mResults[2] & mResults[4] & mResults[6]) == mResults[2])
+            {
+                // game end
+                mGameEnded = true;
+
+                Button2_0.Background = Button1_1.Background = Button0_2.Background = Brushes.Green;
+            }
+            #endregion
+
+
+            #region draw
+            if (!mResults.Any(result => result == MarkType.Free))
+            {
+                mGameEnded = true;
+                //turn all orange
+                Container.Children.Cast<Button>().ToList().ForEach(buttons =>
+                {
+                    buttons.Background = Brushes.Orange;
+                });
+                #endregion
+            }
         }
     }
 }
